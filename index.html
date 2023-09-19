@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Simple Lightbox Example</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <section class="video-gallery grid grid-4">
+            <a href="casaverde.mp4" data-stlightbox="video">
+                <img src="image3.jpeg" alt="Image 1" />
+            </a>
+        </section>
+        <section class="stellar-gallery grid grid-4">
+            <a href="image1.png" data-stlightbox="stellar">
+                <img src="image1.png" alt="Image 1" />
+            </a>
+            <a href="casaverde.mp4" data-stlightbox="stellar">
+                <img src="image3.jpeg" alt="Image 1" />
+            </a>
+            <a href="image2.png" data-stlightbox="stellar">
+                <img src="image2.png" alt="Image 2" />
+            </a>
+            <a href="image3.jpeg" data-stlightbox="stellar">
+                <img src="image3.jpeg" alt="Image 3" />
+            </a>
+        </section>
+
+        <section class="test-gallery grid grid-4">
+            <a href="image3.jpeg" data-stlightbox="test"><img src="image3.jpeg" alt="Image 4" /></a>
+            <a href="image2.png" data-stlightbox="test"><img src="image2.png" alt="Image 5" /></a>
+            <a href="image1.png" data-stlightbox="test"><img src="image1.png" alt="Image 6" /></a>
+        </section>
+
+        <script type="module">
+            import Stlightbox from './index.js';
+
+            new Stlightbox({
+                showDownloadButton: true,
+                keyboardControls: true,
+                pagination: true,
+                videoAutoplay: true,
+                loop: true,
+            });
+        </script>
+    </body>
+</html>
