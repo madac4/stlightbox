@@ -1,14 +1,38 @@
 {
     "name": "stlightbox",
     "version": "1.0.0",
-    "description": "Stlightbox is a lightweight and customizable JavaScript lightbox plugin that allows you to display images and videos in a beautiful overlay with various configuration options.",
-    "main": "index.js",
+    "description": "Stlightbox is a lightweight and customizable JavaScript lightbox plugin that allows you to display images and videos in a beautiful overlay.",
+    "main": "dist/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc",
+        "start": "node dist/index.js"
     },
-    "author": "whhroo",
+    "author": {
+        "name": "whhroo",
+        "email": "orbupetru12@gmail.com",
+        "url": "https://www.linkedin.com/in/whhroo/"
+    },
     "license": "MIT",
-    "dependencies": {
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/madac4/stlightbox.git"
+    },
+    "homepage": "https://github.com/madac4/stlightbox",
+    "keywords": [
+        "lightbox",
+        "javascript",
+        "plugin",
+        "image",
+        "video",
+        "gallery",
+        "slider"
+    ],
+    "devDependencies": {
+        "nodemon": "^3.0.1",
         "typescript": "^5.2.2"
     }
 }

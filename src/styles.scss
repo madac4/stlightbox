@@ -1,0 +1,125 @@
+:root {
+    --main-color: #121212;
+}
+
+.stlightbox {
+    transition: 0.3s;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+}
+
+.stlightbox button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+.stlightbox button svg,
+.stlightbox a svg {
+    width: 26px;
+    height: 26px;
+    color: var(--main-color);
+}
+
+.stlightbox .stlightbox-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: calc(100% - 40px);
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 69;
+    gap: 20px;
+}
+
+.stlightbox .stlightbox-gallery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.stlightbox .stlightbox-gallery img {
+    width: auto;
+    height: auto;
+}
+
+.stlightbox .stlightbox-gallery video {
+    width: 1200px;
+    height: auto;
+}
+
+.stlightbox .stlightbox-gallery .stlightbox-gallery__slides {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.stlightbox .stlightbox-gallery .stlightbox-gallery__slide {
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    position: absolute;
+    scale: 0;
+}
+
+.stlightbox .stlightbox-gallery .stlightbox-gallery__slide.stlightbox-gallery__slide--current {
+    opacity: 1;
+    visibility: visible;
+    scale: 1;
+    scale: 1;
+}
+
+.stlightbox .stlightbox-gallery .stlightbox-gallery__controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 40px);
+    padding: 0 20px;
+}
+
+.stlightbox .stlightbox-gallery .stlightbox-gallery__controls button svg {
+    width: 32px;
+    height: 32px;
+}
+
+.stlightbox-pagination {
+    color: var(--main-color);
+    display: flex;
+    gap: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    font-family: inherit;
+    flex: 1;
+}
+
+/* TO DELETE */
+.grid.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.grid a,
+.grid img,
+.grid video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+section {
+    margin: 40px 0;
+}
