@@ -276,7 +276,7 @@ class Stlightbox {
         }
     }
 
-    refreshGallery(): void {
+    refreshGallery = () => {
         this.galleries = {};
 
         const galleryImages: NodeListOf<HTMLAnchorElement> =
@@ -291,7 +291,7 @@ class Stlightbox {
                 this.galleries[lightboxGroup].push(link);
             }
         });
-    }
+    };
 
     private dropGallery() {
         const galleryOverlay = (document.querySelector('.stlightbox') as HTMLElement) || null;
