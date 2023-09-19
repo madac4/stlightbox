@@ -1,6 +1,6 @@
 {
     "name": "stlightbox",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Stlightbox is a lightweight and customizable JavaScript lightbox plugin that allows you to display images and videos in a beautiful overlay.",
     "main": "dist/index.js",
     "type": "module",
