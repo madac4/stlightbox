@@ -51,6 +51,18 @@ To use Stlightbox in your project, follow these simple steps:
 </a>
 ```
 
+3. Initialize Stlightbox in your JavaScript code:
+
+```js
+const lightbox = new Stlightbox({
+    // Configuration options (see below)
+});
+
+lightbox.initialize();
+```
+
+4. Customize the appearance and behavior of the lightbox by providing configuration options (see the Configuration section below).
+
 ## Configuration
 
 You can customize the behavior and appearance of Stlightbox by passing configuration options when initializing it. Here are the available options:
@@ -66,11 +78,12 @@ You can customize the behavior and appearance of Stlightbox by passing configura
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/madac4/stlightbox/blob/main/LICENCE) file for details.
 
 ## Acknowledgments
 
-Icons used in the lightbox are provided by Heroicons.
-Contributing
+Icons used in the lightbox are provided by [Heroicons](https://heroicons.com/).
+
+## Contributing
 
 Contributions are welcome! Feel free to open an issue or submit a pull request.
