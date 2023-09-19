@@ -67,14 +67,16 @@ lightbox.initialize();
 
 You can customize the behavior and appearance of Stlightbox by passing configuration options when initializing it. Here are the available options:
 
--   lightThemeBackground: Background color for the light theme (default: 'rgba(255, 255, 255, 0.5)').
--   darkThemeBackground: Background color for the dark theme (default: 'rgba(100, 100, 100, 0.5)').
--   paginationSeparator: Separator between current and total in pagination (default: 'of').
--   showDownloadButton: Show a download button for images (default: false).
--   keyboardControls: Enable keyboard navigation (default: true).
--   videoAutoplay: Autoplay videos in the lightbox (default: false).
--   pagination: Show pagination (default: false).
--   loop: Enable loop navigation (default: false).
+| Option               | Description                                       | Default Value              |
+| -------------------- | ------------------------------------------------- | -------------------------- |
+| lightThemeBackground | Background color for the light theme              | 'rgba(255, 255, 255, 0.5)' |
+| darkThemeBackground  | Background color for the dark theme               | 'rgba(100, 100, 100, 0.5)' |
+| showDownloadButton   | Show a download button for images                 | false                      |
+| keyboardControls     | Enable keyboard navigation                        | true                       |
+| videoAutoplay        | Autoplay videos in the lightbox                   | false                      |
+| pagination           | Enable pagination                                 | false                      |
+| paginationSeparator  | Separator between current and total in pagination | 'of'                       |
+| loop                 | Enable loop navigation                            | false                      |
 
 ## License
 
