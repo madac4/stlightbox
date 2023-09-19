@@ -23,11 +23,32 @@ npm install stlightbox
 
 To use Stlightbox in your project, follow these simple steps:
 
-1. Include the CSS and JavaScript files in your HTML document:
+1. Include the CSS in your h:
 
-```bash
-<link rel="stylesheet" href="path/to/stlightbox.css">
+```html
+<link rel="stylesheet" href="path/to/stlightbox.css" />
+
 <script src="path/to/stlightbox.js"></script>
+```
+
+2. Wrap your image or video i <a> tag with the same href. Add the **data-stlightbox** attribute to the <a> tag you want to include in the lightbox:
+
+```html
+<!-- FIRST GALLERY -->
+<a href="image1.jpg" data-stlightbox="stellar-solutions">
+    <img src="image1.jpg" alt="Image 1" />
+</a>
+<a href="image2.jpg" data-stlightbox="stellar-solutions">
+    <img src="image2.jpg" alt="Image 2" />
+</a>
+
+<!-- SECOND GALLERY -->
+<a href="image3.jpg" data-stlightbox="stl-gallery">
+    <img src="image3.jpg" alt="Image 3" />
+</a>
+<a href="image4.jpg" data-stlightbox="stl-gallery">
+    <img src="image4.jpg" alt="Image 4" />
+</a>
 ```
 
 ## Configuration
