@@ -276,23 +276,6 @@ class Stlightbox {
         }
     }
 
-    refreshGallery = () => {
-        this.galleries = {};
-
-        const galleryImages: NodeListOf<HTMLAnchorElement> =
-            document.querySelectorAll('[data-stlightbox]');
-
-        galleryImages.forEach((link: HTMLAnchorElement) => {
-            const lightboxGroup = link.getAttribute('data-stlightbox');
-            if (lightboxGroup !== null) {
-                if (!this.galleries[lightboxGroup]) {
-                    this.galleries[lightboxGroup] = [];
-                }
-                this.galleries[lightboxGroup].push(link);
-            }
-        });
-    };
-
     private dropGallery() {
         const galleryOverlay = (document.querySelector('.stlightbox') as HTMLElement) || null;
         if (galleryOverlay) {
@@ -316,6 +299,11 @@ class Stlightbox {
             }
         };
         document.addEventListener('keydown', this.handleKeyboardEvent);
+    }
+
+    refreshGallery(): void {
+        this.galleries = {};
+        this.initialize();
     }
 
     private initialize() {

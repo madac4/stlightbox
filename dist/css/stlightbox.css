@@ -5,7 +5,8 @@
   width: 100%;
   height: 100%;
   backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px); }
+  -webkit-backdrop-filter: blur(30px);
+  z-index: 9999; }
   .stlightbox-controls {
     display: flex;
     align-items: center;

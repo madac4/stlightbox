@@ -36,6 +36,7 @@ declare class Stlightbox {
     private updatePagination;
     private dropGallery;
     private addKeyboardEventListeners;
+    refreshGallery(): void;
     private initialize;
 }
 export default Stlightbox;

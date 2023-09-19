@@ -238,6 +238,10 @@ class Stlightbox {
         };
         document.addEventListener('keydown', this.handleKeyboardEvent);
     }
+    refreshGallery() {
+        this.galleries = {};
+        this.initialize();
+    }
     initialize() {
         const galleryImages = document.querySelectorAll('[data-stlightbox]');
         galleryImages.forEach((link) => {
