@@ -24,7 +24,7 @@ class Stlightbox {
     private currentLightboxGroup: Array<HTMLAnchorElement> | null;
     private currentSlideIndex: number;
     private galleries: { [key: string]: Array<HTMLAnchorElement> };
-    private handleKeyboardEvent: (e: KeyboardEvent) => void;
+    private handleKeyboardEvent!: (e: KeyboardEvent) => void;
     private lightboxIcons: {
         close: string;
         chevronRight: string;
@@ -302,14 +302,17 @@ class Stlightbox {
     }
 
     private initialize() {
-        const galleryImages = document.querySelectorAll('[data-stlightbox]');
+        const galleryImages: NodeListOf<HTMLAnchorElement> =
+            document.querySelectorAll('[data-stlightbox]');
 
         galleryImages.forEach((link: HTMLAnchorElement) => {
             const lightboxGroup = link.getAttribute('data-stlightbox');
-            if (!this.galleries[lightboxGroup]) {
-                this.galleries[lightboxGroup] = [];
+            if (lightboxGroup !== null) {
+                if (!this.galleries[lightboxGroup]) {
+                    this.galleries[lightboxGroup] = [];
+                }
+                this.galleries[lightboxGroup].push(link);
             }
-            this.galleries[lightboxGroup].push(link);
         });
 
         galleryImages.forEach((link: HTMLAnchorElement) => {

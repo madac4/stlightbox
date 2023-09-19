@@ -242,10 +242,12 @@ class Stlightbox {
         const galleryImages = document.querySelectorAll('[data-stlightbox]');
         galleryImages.forEach((link) => {
             const lightboxGroup = link.getAttribute('data-stlightbox');
-            if (!this.galleries[lightboxGroup]) {
-                this.galleries[lightboxGroup] = [];
+            if (lightboxGroup !== null) {
+                if (!this.galleries[lightboxGroup]) {
+                    this.galleries[lightboxGroup] = [];
+                }
+                this.galleries[lightboxGroup].push(link);
             }
-            this.galleries[lightboxGroup].push(link);
         });
         galleryImages.forEach((link) => {
             link.addEventListener('click', (e) => {
