@@ -1,49 +1,5 @@
 class Stlightbox {
-    private defaultConfig: {
-        lightThemeBackground: string;
-        darkThemeBackground: string;
-        paginationSeparator: string;
-        showDownloadButton: boolean;
-        keyboardControls: boolean;
-        videoAutoplay: boolean;
-        pagination: boolean;
-        loop: boolean;
-    };
-
-    private config: {
-        lightThemeBackground: string;
-        darkThemeBackground: string;
-        paginationSeparator: string;
-        showDownloadButton: boolean;
-        keyboardControls: boolean;
-        videoAutoplay: boolean;
-        pagination: boolean;
-        loop: boolean;
-    };
-
-    private currentLightboxGroup: Array<HTMLAnchorElement> | null;
-    private currentSlideIndex: number;
-    private galleries: { [key: string]: Array<HTMLAnchorElement> };
-    private handleKeyboardEvent: (e: KeyboardEvent) => void;
-    private lightboxIcons: {
-        close: string;
-        chevronRight: string;
-        chevronLeft: string;
-        download: string;
-    };
-
-    constructor(
-        config: Partial<{
-            lightThemeBackground: string;
-            darkThemeBackground: string;
-            paginationSeparator: string;
-            showDownloadButton: boolean;
-            keyboardControls: boolean;
-            videoAutoplay: boolean;
-            pagination: boolean;
-            loop: boolean;
-        }> = {},
-    ) {
+    constructor(config = {}) {
         this.defaultConfig = {
             lightThemeBackground: 'rgba(255, 255, 255, 0.5)',
             darkThemeBackground: 'rgba(100, 100, 100, 0.5)',
@@ -54,8 +10,7 @@ class Stlightbox {
             pagination: false,
             loop: false,
         };
-
-        this.config = { ...this.defaultConfig, ...config };
+        this.config = Object.assign(Object.assign({}, this.defaultConfig), config);
         this.currentLightboxGroup = null;
         this.currentSlideIndex = 0;
         this.galleries = {};
@@ -81,12 +36,10 @@ class Stlightbox {
         };
         this.initialize();
     }
-
-    private addElementClass(element: HTMLElement, className: string) {
+    addElementClass(element, className) {
         element.classList.add(className);
     }
-
-    private createGalleryOverlay() {
+    createGalleryOverlay() {
         const galleryOverlay = document.createElement('div');
         this.addElementClass(galleryOverlay, 'stlightbox');
         this.addElementClass(galleryOverlay, 'stlightbox-overlay');
@@ -97,21 +50,18 @@ class Stlightbox {
         }, 1);
         return galleryOverlay;
     }
-
-    private createLightboxControls() {
+    createLightboxControls() {
         const lightboxControls = document.createElement('div');
         this.addElementClass(lightboxControls, 'stlightbox-controls');
         return lightboxControls;
     }
-
-    private createCloseButton() {
+    createCloseButton() {
         const closeButton = document.createElement('button');
         this.addElementClass(closeButton, 'stlightbox-close');
         closeButton.insertAdjacentHTML('beforeend', this.lightboxIcons.close);
         return closeButton;
     }
-
-    private createDownloadButton(currentImage: HTMLAnchorElement) {
+    createDownloadButton(currentImage) {
         const downloadButton = document.createElement('a');
         this.addElementClass(downloadButton, 'stlightbox-download');
         downloadButton.insertAdjacentHTML('beforeend', this.lightboxIcons.download);
@@ -119,48 +69,41 @@ class Stlightbox {
         downloadButton.setAttribute('href', currentImage.getAttribute('href') || '');
         return downloadButton;
     }
-
-    private createGallery() {
+    createGallery() {
         const gallery = document.createElement('div');
         this.addElementClass(gallery, 'stlightbox-gallery');
         return gallery;
     }
-
-    private checkTheme() {
+    checkTheme() {
         const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         return isDark;
     }
-
-    private isImage(url: string) {
+    isImage(url) {
         return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
     }
-
-    private createGallerySlides(currentGallery: HTMLAnchorElement[]) {
+    createGallerySlides(currentGallery) {
         const gallerySlides = document.createElement('div');
         this.addElementClass(gallerySlides, 'stlightbox-gallery__slides');
         currentGallery.forEach((file, index) => {
             let gallerySlide;
             if (this.isImage(file.getAttribute('href') || '')) {
                 gallerySlide = this.createGalleryPhotoSlide(file);
-            } else {
+            }
+            else {
                 gallerySlide = this.createGalleryVideoSlide(file);
             }
             if (index === this.currentSlideIndex) {
                 this.addElementClass(gallerySlide, 'stlightbox-gallery__slide--current');
-                if (
-                    this.config.videoAutoplay &&
-                    gallerySlide.children[0] instanceof HTMLVideoElement
-                ) {
-                    (gallerySlide.children[0] as HTMLVideoElement).play();
+                if (this.config.videoAutoplay &&
+                    gallerySlide.children[0] instanceof HTMLVideoElement) {
+                    gallerySlide.children[0].play();
                 }
             }
             gallerySlides.appendChild(gallerySlide);
         });
-
         return gallerySlides;
     }
-
-    private createGalleryPhotoSlide(file: HTMLAnchorElement) {
+    createGalleryPhotoSlide(file) {
         const gallerySlide = document.createElement('div');
         const galleryImage = document.createElement('img');
         galleryImage.setAttribute('src', file.getAttribute('href') || '');
@@ -169,8 +112,7 @@ class Stlightbox {
         gallerySlide.appendChild(galleryImage);
         return gallerySlide;
     }
-
-    private createGalleryVideoSlide(image: HTMLAnchorElement) {
+    createGalleryVideoSlide(image) {
         const gallerySlide = document.createElement('div');
         const galleryVideo = document.createElement('video');
         galleryVideo.setAttribute('src', image.getAttribute('href') || '');
@@ -179,25 +121,19 @@ class Stlightbox {
         gallerySlide.appendChild(galleryVideo);
         return gallerySlide;
     }
-
-    private createGalleryControls() {
+    createGalleryControls() {
         const galleryControls = document.createElement('div');
         this.addElementClass(galleryControls, 'stlightbox-gallery__controls');
         this.addElementClass(galleryControls, 'gallery-controls');
-
         const galleryArrowLeft = this.createGalleryArrow('prev');
         const galleryArrowRight = this.createGalleryArrow('next');
-
         galleryControls.appendChild(galleryArrowLeft);
         galleryControls.appendChild(galleryArrowRight);
-
         return galleryControls;
     }
-
-    private createGalleryArrow(direction: 'prev' | 'next') {
+    createGalleryArrow(direction) {
         const galleryArrow = document.createElement('button');
-        const icon =
-            direction === 'prev' ? this.lightboxIcons.chevronLeft : this.lightboxIcons.chevronRight;
+        const icon = direction === 'prev' ? this.lightboxIcons.chevronLeft : this.lightboxIcons.chevronRight;
         galleryArrow.insertAdjacentHTML('afterbegin', icon);
         this.addElementClass(galleryArrow, 'gallery-controls__arrow');
         this.addElementClass(galleryArrow, `gallery-controls__arrow--${direction}`);
@@ -206,31 +142,33 @@ class Stlightbox {
         });
         return galleryArrow;
     }
-
-    private createPagination() {
+    createPagination() {
+        var _a;
         const pagination = document.createElement('div');
         const current = this.currentSlideIndex + 1;
-        const total = this.currentLightboxGroup?.length || 0;
+        const total = ((_a = this.currentLightboxGroup) === null || _a === void 0 ? void 0 : _a.length) || 0;
         const separator = this.config.paginationSeparator;
         this.addElementClass(pagination, 'stlightbox-pagination');
         pagination.innerHTML = `${current} <span class="stlightbox-pagination__separator">${separator}</span> ${total}`;
         return pagination;
     }
-
-    private navigateGallery(direction: number) {
+    navigateGallery(direction) {
         if (this.currentLightboxGroup && this.currentLightboxGroup.length > 1) {
             const prevSlide = this.currentSlideIndex;
             this.currentSlideIndex += direction;
             if (this.config.loop) {
                 if (this.currentSlideIndex >= this.currentLightboxGroup.length) {
                     this.currentSlideIndex = 0;
-                } else if (this.currentSlideIndex < 0) {
+                }
+                else if (this.currentSlideIndex < 0) {
                     this.currentSlideIndex = this.currentLightboxGroup.length - 1;
                 }
-            } else {
+            }
+            else {
                 if (this.currentSlideIndex >= this.currentLightboxGroup.length) {
                     this.currentSlideIndex = this.currentLightboxGroup.length - 1;
-                } else if (this.currentSlideIndex < 0) {
+                }
+                else if (this.currentSlideIndex < 0) {
                     this.currentSlideIndex = 0;
                 }
             }
@@ -239,142 +177,128 @@ class Stlightbox {
             this.updateDownloadLink(this.currentSlideIndex);
         }
     }
-
-    private updateDisplayedSlide(index: number, prev: number) {
+    updateDisplayedSlide(index, prev) {
         const slides = document.querySelectorAll('.stlightbox .stlightbox-gallery__slide');
         slides.forEach((slide) => {
             slide.classList.remove('stlightbox-gallery__slide--current');
             if (slide.children[0] instanceof HTMLVideoElement) {
-                (slide.children[0] as HTMLVideoElement).pause();
+                slide.children[0].pause();
             }
         });
         slides[index].classList.add('stlightbox-gallery__slide--current');
         if (this.config.videoAutoplay) {
             if (slides[index].children[0] instanceof HTMLVideoElement) {
-                (slides[index].children[0] as HTMLVideoElement).play();
-            } else if (slides[prev].children[0] instanceof HTMLVideoElement) {
-                (slides[prev].children[0] as HTMLVideoElement).pause();
+                slides[index].children[0].play();
+            }
+            else if (slides[prev].children[0] instanceof HTMLVideoElement) {
+                slides[prev].children[0].pause();
             }
         }
     }
-
-    private updateDownloadLink(index: number) {
+    updateDownloadLink(index) {
+        var _a;
         const downloadLink = document.querySelector('.stlightbox-download');
         if (downloadLink) {
-            const imageUrl = this.currentLightboxGroup?.[index].getAttribute('href') || '';
+            const imageUrl = ((_a = this.currentLightboxGroup) === null || _a === void 0 ? void 0 : _a[index].getAttribute('href')) || '';
             downloadLink.setAttribute('href', imageUrl);
         }
     }
-
-    private updatePagination() {
+    updatePagination() {
+        var _a;
         const pagination = document.querySelector('.stlightbox .stlightbox-pagination');
         const current = this.currentSlideIndex + 1;
-        const total = this.currentLightboxGroup?.length || 0;
+        const total = ((_a = this.currentLightboxGroup) === null || _a === void 0 ? void 0 : _a.length) || 0;
         const separator = this.config.paginationSeparator;
         if (pagination) {
             pagination.innerHTML = `${current} <span class="stlightbox-pagination__separator">${separator}</span> ${total}`;
         }
     }
-
-    private dropGallery() {
-        const galleryOverlay = (document.querySelector('.stlightbox') as HTMLElement) || null;
+    dropGallery() {
+        const galleryOverlay = document.querySelector('.stlightbox') || null;
         if (galleryOverlay) {
             galleryOverlay.style.opacity = '0';
             document.body.classList.remove('lock');
             document.removeEventListener('keydown', this.handleKeyboardEvent);
             setTimeout(() => {
-                galleryOverlay?.remove();
+                galleryOverlay === null || galleryOverlay === void 0 ? void 0 : galleryOverlay.remove();
             }, 300);
         }
     }
-
-    private addKeyboardEventListeners() {
-        this.handleKeyboardEvent = (e: KeyboardEvent) => {
+    addKeyboardEventListeners() {
+        this.handleKeyboardEvent = (e) => {
             if (e.key === 'ArrowLeft') {
                 this.navigateGallery(-1);
-            } else if (e.key === 'ArrowRight') {
+            }
+            else if (e.key === 'ArrowRight') {
                 this.navigateGallery(1);
-            } else if (e.key === 'Escape') {
+            }
+            else if (e.key === 'Escape') {
                 this.dropGallery();
             }
         };
         document.addEventListener('keydown', this.handleKeyboardEvent);
     }
-
-    private initialize() {
+    initialize() {
         const galleryImages = document.querySelectorAll('[data-stlightbox]');
-
-        galleryImages.forEach((link: HTMLAnchorElement) => {
+        galleryImages.forEach((link) => {
             const lightboxGroup = link.getAttribute('data-stlightbox');
             if (!this.galleries[lightboxGroup]) {
                 this.galleries[lightboxGroup] = [];
             }
             this.galleries[lightboxGroup].push(link);
         });
-
-        galleryImages.forEach((link: HTMLAnchorElement) => {
+        galleryImages.forEach((link) => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const lightboxGroup = link.getAttribute('data-stlightbox');
                 const currentGallery = this.galleries[lightboxGroup || ''] || [];
                 const currentIndex = currentGallery.indexOf(link);
                 const isDark = this.checkTheme();
-
                 this.currentLightboxGroup = currentGallery;
                 this.currentSlideIndex = currentIndex;
-
                 const galleryOverlay = this.createGalleryOverlay();
                 const lightboxControls = this.createLightboxControls();
                 const closeButton = this.createCloseButton();
                 const gallerySlides = this.createGallerySlides(currentGallery);
                 const galleryControls = this.createGalleryControls();
                 const lightboxGallery = this.createGallery();
-
                 if (isDark) {
                     galleryOverlay.style.backgroundColor = this.config.darkThemeBackground;
-                } else {
+                }
+                else {
                     galleryOverlay.style.backgroundColor = this.config.lightThemeBackground;
                 }
-
                 if (this.config.pagination) {
                     lightboxControls.appendChild(this.createPagination());
                 }
-
                 if (this.config.showDownloadButton) {
                     const downloadButton = this.createDownloadButton(currentGallery[currentIndex]);
                     lightboxControls.appendChild(downloadButton);
                 }
-
                 lightboxControls.appendChild(closeButton);
                 galleryOverlay.appendChild(lightboxControls);
                 galleryOverlay.appendChild(lightboxGallery);
                 lightboxGallery.appendChild(gallerySlides);
                 lightboxGallery.appendChild(galleryControls);
-
                 if (galleryOverlay) {
                     galleryOverlay.addEventListener('click', (e) => {
-                        if (
-                            e.target instanceof HTMLElement &&
-                            e.target.classList.contains('stlightbox-gallery')
-                        ) {
+                        if (e.target instanceof HTMLElement &&
+                            e.target.classList.contains('stlightbox-gallery')) {
                             this.dropGallery();
                         }
                     });
                 }
-
                 closeButton.addEventListener('click', () => {
                     this.dropGallery();
                 });
-
                 if (this.config.keyboardControls) {
                     this.addKeyboardEventListeners();
                 }
-
                 document.body.style.overflow = 'hidden';
                 document.body.appendChild(galleryOverlay);
             });
         });
     }
 }
-
 export default Stlightbox;
+//# sourceMappingURL=stlightbox.js.map

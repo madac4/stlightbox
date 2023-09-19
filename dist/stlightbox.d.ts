@@ -1,0 +1,41 @@
+declare class Stlightbox {
+    private defaultConfig;
+    private config;
+    private currentLightboxGroup;
+    private currentSlideIndex;
+    private galleries;
+    private handleKeyboardEvent;
+    private lightboxIcons;
+    constructor(config?: Partial<{
+        lightThemeBackground: string;
+        darkThemeBackground: string;
+        paginationSeparator: string;
+        showDownloadButton: boolean;
+        keyboardControls: boolean;
+        videoAutoplay: boolean;
+        pagination: boolean;
+        loop: boolean;
+    }>);
+    private addElementClass;
+    private createGalleryOverlay;
+    private createLightboxControls;
+    private createCloseButton;
+    private createDownloadButton;
+    private createGallery;
+    private checkTheme;
+    private isImage;
+    private createGallerySlides;
+    private createGalleryPhotoSlide;
+    private createGalleryVideoSlide;
+    private createGalleryControls;
+    private createGalleryArrow;
+    private createPagination;
+    private navigateGallery;
+    private updateDisplayedSlide;
+    private updateDownloadLink;
+    private updatePagination;
+    private dropGallery;
+    private addKeyboardEventListeners;
+    private initialize;
+}
+export default Stlightbox;
