@@ -13,7 +13,7 @@ Stlightbox is a lightweight and customizable JavaScript lightbox plugin that all
 
 ## Installation
 
-You can install Stlightbox by including the JavaScript and CSS files in your project. You can download the latest release from the [GitHub repository](https://github.com/yourusername/stlightbox) or use a package manager like npm or yarn:
+You can install Stlightbox by including the JavaScript and CSS files in your project. You can download the latest release from the [GitHub repository](https://github.com/madac4/stlightbox) or use a package manager like npm or yarn:
 
 ```bash
 npm install stlightbox
