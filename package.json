@@ -7,7 +7,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build:css": "cleancss dist/css/*.css -o dist/css/stlightbox.min.css",
-        "build:js": "uglifyjs dist/*.js -o dist/stlightbox.min.js",
+        "build:js": "uglifyjs dist/*.js -o dist/index.min.js",
         "build:scss": "node-sass src/scss/*.scss dist/css/stlightbox.css",
         "build:ts": "tsc",
         "build": "npm run build:ts && npm run build:scss && npm run build:css && npm run build:js",

@@ -303,4 +303,4 @@ class Stlightbox {
     }
 }
 export default Stlightbox;
-//# sourceMappingURL=stlightbox.js.map
+//# sourceMappingURL=index.js.map
