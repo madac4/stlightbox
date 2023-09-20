@@ -217,7 +217,7 @@ class Stlightbox {
         const galleryOverlay = document.querySelector('.stlightbox') || null;
         if (galleryOverlay) {
             galleryOverlay.style.opacity = '0';
-            document.body.classList.remove('lock');
+            document.body.style.overflow = 'auto';
             document.removeEventListener('keydown', this.handleKeyboardEvent);
             setTimeout(() => {
                 galleryOverlay === null || galleryOverlay === void 0 ? void 0 : galleryOverlay.remove();

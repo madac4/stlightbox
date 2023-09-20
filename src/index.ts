@@ -280,7 +280,7 @@ class Stlightbox {
         const galleryOverlay = (document.querySelector('.stlightbox') as HTMLElement) || null;
         if (galleryOverlay) {
             galleryOverlay.style.opacity = '0';
-            document.body.classList.remove('lock');
+            document.body.style.overflow = 'auto';
             document.removeEventListener('keydown', this.handleKeyboardEvent);
             setTimeout(() => {
                 galleryOverlay?.remove();
